@@ -3,6 +3,7 @@ const app = express()
 const port = 4000
 const data = require('./Student_Data.json')
 var cors = require('cors')
+const axios = require ('axios')
 
 //get, post, patch, delete, put --REST API 
 app.use(cors())
@@ -19,9 +20,29 @@ app.get('/getallentries', (req, res) => {
 res.status(200).json(data)  
 })
 
+//
+//install axios in backend 
+// getposts - create new route that will call jsonplaceer
+app.get('/getposts', (req, res) => {
+  axios.get("https://jsonplaceholder.typicode.com/posts")
+  .then(resp =>res.status(200).json(resp.data))
+  .catch(e=>res.status(404))
+  })
+
+  // SPACE X HISTORY
+app.get('/getposts', (req, res) => {
+  axios.get("https://jsonplaceholder.typicode.com/posts")
+  .then(resp =>res.status(200).json(resp.data))
+  .catch(e=>res.status(404))
+  })
+
+//https://jsonplaceholder.typicode.com/posts
+//return that data to front end 
+
+
 //fallback / catch all 
 app.get('/', (req, res) => {
-    res.send("<h1>'Tanishka'</h1>")
+    res.send("<h1>'Welcome to Site '</h1>")
   })
 
 app.listen(port, () => {
